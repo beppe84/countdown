@@ -1,0 +1,197 @@
+body {
+    background-color: #000000; 
+    color: white;
+    font-family: 'Times New Roman', Times, serif; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; 
+}
+
+#countdown-content { /* Usato per il contenuto principale del countdown */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative; 
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #cccccc; 
+    margin-bottom: 60px; 
+}
+
+#status-message {
+    font-size: 1.1em;
+    color: #999999;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.digital-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 0; 
+    width: auto;
+}
+
+.time-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.number {
+    font-size: 12vw; 
+    font-weight: 300; 
+    color: #eeeeee; 
+    line-height: 0.9; 
+    margin-bottom: 10px; 
+    padding: 0 10px; 
+}
+
+.label {
+    font-size: 2vw; 
+    font-weight: 400; 
+    color: #cccccc; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ------------------------------------------- */
+/* STILI PER I SEPARATORI A CUORE (COUNTDOWN) */
+/* ------------------------------------------- */
+
+.heart-separator {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 6vw; 
+    height: 100%; 
+}
+
+.heart-svg {
+    width: 15vw; 
+    height: 15vw;
+    max-width: 150px; 
+    max-height: 150px;
+}
+
+@keyframes fade-heart {
+    0% { opacity: 0; transform: translateY(-20px) scale(0.8); } 
+    1% { opacity: 1; transform: translateY(-20px) scale(1.3); } 
+    5% { opacity: 1; transform: translateY(-20px) scale(0.9); } 
+    100% { opacity: 0; transform: translateY(-20px) scale(0.8); } 
+}
+
+.heart-animated {
+    animation: fade-heart 1s ease-out forwards;
+}
+
+
+/* Stili per schermi più piccoli */
+@media (max-width: 768px) {
+    .digital-countdown {
+        gap: 0;
+    }
+    .number {
+        font-size: 20vw; 
+    }
+    .label {
+        font-size: 3vw; 
+    }
+    .heart-svg {
+        width: 6vw;
+        height: 6vw;
+    }
+}
+
+
+/* ------------------------------------------- */
+/* STILI PER L'EFFETTO NEON (SCHERMATA FINALE) */
+/* ------------------------------------------- */
+
+/* NOTA: body styles (width, height, background-color, display, align-items, justify-items) 
+sono gestiti dall'elemento #neon-final-screen in HTML per non interferire con il body principale. */
+
+#container-neon {
+    position: relative;
+    overflow: hidden;
+    filter: brightness(300%);
+    background: #000;
+    padding: 30px;
+}
+ 
+#txt {
+    color: #000;
+    font-size: 170px;
+    font-weight: bold;
+    font-family: "Leckerli One", cursive;
+    font-style: normal;
+    text-align: center;
+    line-height: 1.1;
+    position: relative;
+}
+
+#txt-blur {
+    color: #fff;
+    font-size: 170px;
+    font-weight: bold;
+    font-family: "Leckerli One", cursive;
+    font-style: normal;
+    text-align: center;
+    line-height: 1.1;
+    position: absolute;
+    top: 5;
+    left: 0;
+    width: 100%;
+    mix-blend-mode: difference;
+    filter: blur(10px);
+}
+
+#gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: -moz-linear-gradient(left,#005eff 0%,#d900ff 100%);
+    background: -webkit-linear-gradient(left,#005eff 0%,#d900ff 100%);
+    background: linear-gradient(to right,#005eff 0%,#d900ff 100%);
+    mix-blend-mode: multiply;
+}
+
+#light {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    right: 0px;
+    bottom: 0px;
+    background: radial-gradient(circle, #ffffff, #000 35%)
+        center / 25% 25%;
+    mix-blend-mode: color-dodge;
+    animation: ligth-area 3s linear infinite;
+}
+    
+@keyframes ligth-area {
+    to { transform: translate(50%,50%);}
+}
+
+/* Regolazione della dimensione del testo per schermi piccoli */
+@media (max-width: 1000px) {
+    #txt, #txt-blur {
+        font-size: 10vw; 
+    }
+}
+@media (max-width: 600px) {
+    #txt, #txt-blur {
+        font-size: 8vw; 
+    }
+}

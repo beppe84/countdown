@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting in Malmö in</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="countdown-content" class="full-screen-content"> 
+        <h1>Meeting in Malmö in</h1>
+        
+        <p id="status-message"></p>
+        
+        <div class="digital-countdown">
+            
+            <div class="time-group">
+                <span id="days-number" class="number">00</span>
+                <span class="label">Days</span>
+            </div>
+            
+            <div id="heart-3" class="heart-separator">
+                <svg viewBox="0 0 100 100" class="heart-svg">
+                    <path d="M50,90 C-10,40 10,0 50,20 C90,0 110,40 50,90 Z" fill="#ff69b4"/> 
+                </svg>
+            </div>
+            
+            <div class="time-group">
+                <span id="hours-number" class="number">00</span>
+                <span class="label">Hours</span>
+            </div>
+            
+            <div id="heart-1" class="heart-separator">
+                <svg viewBox="0 0 100 100" class="heart-svg">
+                    <path d="M50,90 C-10,40 10,0 50,20 C90,0 110,40 50,90 Z" fill="#61dafb"/>
+                </svg>
+            </div>
+            
+            <div class="time-group">
+                <span id="minutes-number" class="number">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            
+            <div id="heart-2" class="heart-separator">
+                <svg viewBox="0 0 100 100" class="heart-svg">
+                    <path d="M50,90 C-10,40 10,0 50,20 C90,0 110,40 50,90 Z" fill="#ff69b4"/>
+                </svg>
+            </div>
+            
+            <div class="time-group">
+                <span id="seconds-number" class="number">00</span>
+                <span class="label">Seconds</span>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div id="neon-final-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; background-color: #000;">
+         <div id="container-neon">
+            <div id="txt-blur">Journeys end<br>in lovers meeting</div>
+            <div id="txt">Journeys end<br>in lovers meeting</div>
+            <span id="gradient"></span>
+            <span id="light"></span>
+        </div>
+    </div>
+
+
+    <script>
+    let countdownInterval;
+    // TARGET_DATE_STRING è mantenuta
+    const TARGET_DATE_STRING = "2025-11-25 19:06:00"; 
+    const countDownDateMs = new Date(TARGET_DATE_STRING).getTime(); 
+    
+    const heart1 = document.getElementById("heart-1");
+    const heart2 = document.getElementById("heart-2");
+    const heart3 = document.getElementById("heart-3"); 
+    
+    // Rinomino fullScreenContent in countdownContent per chiarezza
+    const countdownContent = document.getElementById("countdown-content");
+    const neonFinalScreen = document.getElementById("neon-final-screen"); // Nuovo elemento
+    
+    // Variabile per tracciare lo stato
+    let countdownFinished = false; 
+
+    /**
+     * Riavvia l'animazione forzando il ricalcolo CSS, sincronizzando il battito.
+     */
+    function restartHeartAnimation() {
+        const hearts = [heart1, heart2, heart3]; 
+        hearts.forEach(heart => {
+            heart.classList.remove("heart-animated");
+            void heart.offsetWidth; 
+            heart.classList.add("heart-animated");
+        });
+    }
+
+    function showNeonAnimation() {
+        countdownContent.style.display = 'none'; // Nasconde il countdown
+        neonFinalScreen.style.display = 'grid'; // Mostra l'animazione neon (display: grid per centratura)
+    }
+
+    function startCountdown() {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        countdownContent.style.display = 'flex';
+        neonFinalScreen.style.display = 'none'; // Assicura che l'animazione sia nascosta all'avvio
+        
+        document.getElementById("status-message").innerHTML = ""; 
+
+        restartHeartAnimation(); 
+
+        countdownInterval = setInterval(function() {
+
+            const now = new Date().getTime();
+            let distance = countDownDateMs - now;
+
+            if (distance <= 0) {
+                // Se il countdown è finito e non abbiamo ancora mostrato l'animazione
+                if (!countdownFinished) {
+                    clearInterval(countdownInterval); // Ferma il timer
+                    showNeonAnimation(); // Mostra l'animazione finale
+                    countdownFinished = true;
+                    return; 
+                }
+                distance = 0; 
+            } 
+            
+            // Logica di calcolo del tempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const millisecondsLeftAfterDays = distance % (1000 * 60 * 60 * 24);
+            const totalHours = Math.floor(millisecondsLeftAfterDays / (1000 * 60 * 60));
+            const millisecondsLeftAfterHours = distance % (1000 * 60 * 60);
+            const minutes = Math.floor(millisecondsLeftAfterHours / (1000 * 60));
+            const millisecondsLeftAfterMinutes = distance % (1000 * 60);
+            const seconds = Math.floor(millisecondsLeftAfterMinutes / 1000);
+            
+            const daysDisplay = days < 10 ? "0" + days : days;
+            const hoursDisplay = totalHours < 10 ? "0" + totalHours : totalHours;
+            const minutesDisplay = minutes < 10 ? "0" + minutes : minutes;
+            const secondsDisplay = seconds < 10 ? "0" + seconds : seconds;
+            
+            document.getElementById("days-number").innerHTML = daysDisplay;
+            document.getElementById("hours-number").innerHTML = hoursDisplay;
+            document.getElementById("minutes-number").innerHTML = minutesDisplay;
+            document.getElementById("seconds-number").innerHTML = secondsDisplay;
+            
+            restartHeartAnimation();
+
+        }, 1000); 
+    }
+
+    window.onload = startCountdown; 
+    </script>
+
+</body>
+</html>
