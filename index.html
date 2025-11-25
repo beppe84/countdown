@@ -2,14 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Meeting in Malmö in</title>
+    <title>Meeting in Malmö bin</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -62,10 +59,10 @@
         
     </div>
 
-    <div id="neon-final-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; background-color: #000;">
+    <div id="neon-final-screen" class="full-screen-neon" style="display: none;">
          <div id="container-neon">
-            <div id="txt-blur">Journeys end<br>in lovers meeting</div>
-            <div id="txt">Journeys end<br>in lovers meeting</div>
+            <div id="txt-blur">Journeys end in<br>lovers meeting</div>
+            <div id="txt">Journeys end in<br>lovers meeting</div>
             <span id="gradient"></span>
             <span id="light"></span>
         </div>
@@ -74,19 +71,16 @@
 
     <script>
     let countdownInterval;
-    // TARGET_DATE_STRING è mantenuta
-    const TARGET_DATE_STRING = "2025-11-25 19:06:00"; 
+    const TARGET_DATE_STRING = "2025-11-28 09:30:00"; 
     const countDownDateMs = new Date(TARGET_DATE_STRING).getTime(); 
     
     const heart1 = document.getElementById("heart-1");
     const heart2 = document.getElementById("heart-2");
     const heart3 = document.getElementById("heart-3"); 
     
-    // Rinomino fullScreenContent in countdownContent per chiarezza
     const countdownContent = document.getElementById("countdown-content");
-    const neonFinalScreen = document.getElementById("neon-final-screen"); // Nuovo elemento
+    const neonFinalScreen = document.getElementById("neon-final-screen"); 
     
-    // Variabile per tracciare lo stato
     let countdownFinished = false; 
 
     /**
@@ -103,7 +97,7 @@
 
     function showNeonAnimation() {
         countdownContent.style.display = 'none'; // Nasconde il countdown
-        neonFinalScreen.style.display = 'grid'; // Mostra l'animazione neon (display: grid per centratura)
+        neonFinalScreen.style.display = 'grid'; // Mostra l'animazione neon
     }
 
     function startCountdown() {
@@ -112,7 +106,7 @@
         }
         
         countdownContent.style.display = 'flex';
-        neonFinalScreen.style.display = 'none'; // Assicura che l'animazione sia nascosta all'avvio
+        neonFinalScreen.style.display = 'none'; 
         
         document.getElementById("status-message").innerHTML = ""; 
 
@@ -124,17 +118,15 @@
             let distance = countDownDateMs - now;
 
             if (distance <= 0) {
-                // Se il countdown è finito e non abbiamo ancora mostrato l'animazione
                 if (!countdownFinished) {
-                    clearInterval(countdownInterval); // Ferma il timer
-                    showNeonAnimation(); // Mostra l'animazione finale
+                    clearInterval(countdownInterval); 
+                    showNeonAnimation(); 
                     countdownFinished = true;
                     return; 
                 }
                 distance = 0; 
             } 
             
-            // Logica di calcolo del tempo
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const millisecondsLeftAfterDays = distance % (1000 * 60 * 60 * 24);
             const totalHours = Math.floor(millisecondsLeftAfterDays / (1000 * 60 * 60));
