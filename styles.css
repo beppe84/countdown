@@ -118,29 +118,32 @@ h1 {
 /* STILI PER L'EFFETTO NEON (SCHERMATA FINALE) */
 /* ------------------------------------------- */
 
-/* NOTA: body styles (width, height, background-color, display, align-items, justify-items) 
-sono gestiti dall'elemento #neon-final-screen in HTML per non interferire con il body principale. */
-#neon-final-screen {
-    overflow: hidden;
+.full-screen-neon {
+    position: fixed; /* Assicura che copra tutto il viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background-color: #000;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    z-index: 999; /* Alto z-index per coprire tutto */
+    overflow: hidden; /* Nasconde ogni eventuale bordo */
 }
+
 #container-neon {
     position: relative;
-    width: 105%
-    eight: 105%
-    padding: -2,5%
     overflow: hidden;
     filter: brightness(300%);
     background: #000;
-    /*padding: 30px;
-    z-index: 10;
 }
  
 #txt {
     color: #000;
     font-size: 170px;
     font-weight: bold;
-    font-family: "Leckerli One", cursive;
-    font-style: normal;
+    font-family: 'Lato', sans-serif;
     text-align: center;
     line-height: 1.1;
     position: relative;
@@ -150,16 +153,15 @@ sono gestiti dall'elemento #neon-final-screen in HTML per non interferire con il
     color: #fff;
     font-size: 170px;
     font-weight: bold;
-    font-family: "Leckerli One", cursive;
-    font-style: normal;
+    font-family: 'Lato', sans-serif;
     text-align: center;
     line-height: 1.1;
     position: absolute;
-    top: 5;
+    top: 0;
     left: 0;
     width: 100%;
     mix-blend-mode: difference;
-    filter: blur(10px);
+    filter: blur(3px);
 }
 
 #gradient {
