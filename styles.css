@@ -161,7 +161,7 @@ h1 {
     z-index: 20; /* Assicura che il testo sia sopra i cuori */
     /*box-shadow: inset 0 0 0 10px #000;*/
     transform: translateZ(0);
-    clip-path: inset(0.5px);
+    clip-path: inset(2px);
 }
  
 #txt {
